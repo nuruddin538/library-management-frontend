@@ -21,10 +21,12 @@ export const BorrowForm = ({
     quantity: number;
     dueDate: string;
   }>();
-  const minDate = format(new Date(), "yyy-MM-dd");
+  const minDate = format(new Date(), "yyyy-MM-dd");
+
   const defaultDueDate = format(addDays(new Date(), 7), "yyyy-MM-dd");
 
   const onFormSubmit = async (data: { quantity: number; dueDate: string }) => {
+    // console.log("Form Submitted", data);
     try {
       await onSubmit(data);
       toast.success(

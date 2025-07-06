@@ -12,7 +12,7 @@ export const bookApi = createApi({
     }),
     getBookById: builder.query<IBook, string>({
       query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: "Book", id }],
+      providesTags: (_result, _error, id) => [{ type: "Book", id }],
     }),
     createBook: builder.mutation<IBook, Partial<IBook>>({
       query: (body) => ({
@@ -31,7 +31,7 @@ export const bookApi = createApi({
         method: "PUT",
         body: changes,
       }),
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_result, _error, { id }) => [
         { type: "Book", id },
         "Book",
       ],

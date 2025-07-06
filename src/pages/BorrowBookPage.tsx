@@ -6,12 +6,17 @@ import { toast } from "react-toastify";
 
 export const BorrowBookPage = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { data: book, isLoading: isFetching } = useGetBookByIdQuery(id || "");
   const [borrowBook, { isLoading }] = useBorrowBookMutation();
-  const navigate = useNavigate();
 
   const handleSubmit = async (data: { quantity: number; dueDate: string }) => {
+    // console.log("Parent submit triggered", data);
+
     if (!id || !book) return;
+
+    // console.log("Calling borrowBook API with", { bookId: id, ...data });
+
     try {
       await borrowBook({ bookId: id, ...data }).unwrap();
       toast.success("Book borrowed successfully!");
